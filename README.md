@@ -149,3 +149,7 @@ chmod 600 ~/.kaggle/kaggle.json
 ## 6\. Acknowledgement
 
 This project was developed with assistance from Gemini, a large language model by Google, which helped re-engineer the data strategy, validate the model interpretation, and create the robust final workflow.
+## Future Roadmap
+- [ ] **Real-time Integration:** Connect to live sensor feeds via IoT MQTT brokers.
+- [ ] **Advanced Model Architecture:** Experiment with LSTM/Transformers for temporal sequence prediction.
+- [ ] **Cloud Deployment:** Containerize with Docker and deploy to AWS/Azure for scalability.
