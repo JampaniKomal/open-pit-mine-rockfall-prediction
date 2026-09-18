@@ -117,25 +117,25 @@ SAMPLE_SCENARIOS = {
         "displacement_mm": 6.0
     },
     "Softening slope (Medium risk)": {
-        "rainfall_mm_past_24h": 9.5,
-        "seismic_activity": 1.6,
-        "joint_water_pressure_kPa": 55.0,
-        "vibration_level": 0.85,
+        "rainfall_mm_past_24h": 8.5,
+        "seismic_activity": 2.4,
+        "joint_water_pressure_kPa": 39.0,
+        "vibration_level": 0.5,
         "displacement_mm": 15.5
     },
     "Tension crack detected (High risk)": {
-        "rainfall_mm_past_24h": 14.0,
-        "seismic_activity": 2.4,
-        "joint_water_pressure_kPa": 68.0,
-        "vibration_level": 1.05,
+        "rainfall_mm_past_24h": 10.5,
+        "seismic_activity": 3.5,
+        "joint_water_pressure_kPa": 41.0,
+        "vibration_level": 0.8,
         "displacement_mm": 24.0
     },
     "Impending failure (Critical risk)": {
-        "rainfall_mm_past_24h": 18.0,
-        "seismic_activity": 3.1,
-        "joint_water_pressure_kPa": 78.0,
-        "vibration_level": 1.32,
-        "displacement_mm": 33.0
+        "rainfall_mm_past_24h": 11.5,
+        "seismic_activity": 4.5,
+        "joint_water_pressure_kPa": 42.0,
+        "vibration_level": 1.15,
+        "displacement_mm": 31.0
     }
 }
 

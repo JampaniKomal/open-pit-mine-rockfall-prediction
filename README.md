@@ -146,9 +146,54 @@ chmod 600 ~/.kaggle/kaggle.json
 
 -----
 
-## 6\. Acknowledgement
+## 6. Testing & Verification
 
-This project was developed with assistance from Gemini, a large language model by Google, which helped re-engineer the data strategy, validate the model interpretation, and create the robust final workflow.
+The Streamlit app was actually run (not just read) against the committed
+model artefacts, driven with a real headless-browser session:
+
+![Rockfall risk assessment dashboard](docs/screenshot.png)
+
+**Real bug found and fixed:** the four built-in "Scenario explorer" presets
+(Low/Medium/High/Critical) were tested by feeding their exact hardcoded
+feature values directly into the trained model. Two of the four predicted
+the *wrong* tier — "Softening slope (Medium risk)" predicted **High**, and
+"Tension crack detected (High risk)" predicted **Critical**. Comparing the
+scenario values against the actual per-class median feature values in the
+training dataset showed the model itself is correctly calibrated (it
+predicts every tier correctly for the training data's own medians); the
+hand-authored scenario presets simply used `seismic_activity` values well
+below what the model actually associates with each risk tier. Fixed by
+rewriting the Medium/High/Critical presets using values consistent with
+the training data's own per-class distribution; re-verified all four now
+predict their intended label, both by calling the model directly and by
+driving the live Streamlit UI end-to-end (screenshot above shows "Tension
+crack detected (High risk)" correctly predicting High).
+
+## Known Limitations
+
+- No automated test suite; verified manually as described above.
+- The model and dataset are entirely synthetic (statistically informed by
+  real Kaggle rainfall/seismic distributions, but not real mine sensor
+  readings) — a real deployment would need validation against actual
+  instrumented mine-site data before any operational use.
+- `predict_dataframe`'s label-decoding falls back to raw numeric class
+  indices if `label_encoder.inverse_transform` fails for any reason, which
+  would silently show "0/1/2/3" instead of "Low/Medium/High/Critical" in
+  that edge case rather than raising a visible error.
+
+## Acknowledgements
+
+- Rainfall distribution modeled on the [Rainfall Dataset for Simple Time
+  Series Analysis](https://www.kaggle.com/datasets/sujithmandala/rainfall-dataset-for-simple-time-series-analysis)
+  (Kaggle).
+- Seismic magnitude distribution modeled on the [All the Earthquakes
+  Dataset (1990-2023)](https://www.kaggle.com/datasets/alessandrolobello/the-ultimate-earthquake-dataset-from-1990-2023)
+  (Kaggle).
+
+## License
+
+MIT License — see [LICENSE](LICENSE).
+
 ## Future Roadmap
 - [ ] **Real-time Integration:** Connect to live sensor feeds via IoT MQTT brokers.
 - [ ] **Advanced Model Architecture:** Experiment with LSTM/Transformers for temporal sequence prediction.
